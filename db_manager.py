@@ -134,12 +134,14 @@ class DatabaseManager:
             self.connection.commit()
         except Exception as e:
             print(f"Error adding cryptocurrency: {e}")
-    def delete_cryptocurrency(self, user_id, crypto_name):
+
+    def delete_crypto(self, user_id, crypto_name):
         try:
             self.cursor.execute("DELETE FROM cryptocurrencies WHERE user_id=%s AND crypto_name=%s", (user_id, crypto_name))
             self.connection.commit()
         except Exception as e:
             print(f"Error deleting cryptocurrency: {e}")
+
     
     def update_crypto(self, user_id, crypto_name, crypto_quantity):
         try:
@@ -166,6 +168,11 @@ class DatabaseManager:
     def get_all_wallet(self):
         self.cursor.execute("SELECT * FROM wallet")
         return [dict(zip([column[0] for column in self.cursor.description], row)) for row in self.cursor.fetchall()]
+    
+    
+
+
+
     def close(self):
         self.cursor.close()
         self.connection.close()

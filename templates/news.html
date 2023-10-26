@@ -1,0 +1,38 @@
+<!-- news.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ข่าวล่าสุด</title>
+    <!-- Add some basic CSS for better layout (optional) -->
+    <style>
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e1e1e1;
+            padding-bottom: 20px;
+        }
+        h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>ข่าวล่าสุด</h1>
+    <ul>
+        {% for news in news_items %}
+        <li>
+            <h2>{{ news.title }}</h2>
+            <p>{{ news.content }}</p>
+            <small>วันที่เผยแพร่: {{ news.date_published }}</small><br>
+            <small>สินทรัพย์ที่เกี่ยวข้อง: {{ news.related_asset }}</small>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

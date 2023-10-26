@@ -25,6 +25,8 @@ class StockPortfolioApp:
         self.app.route('/data')(self.show_data)
         self.app.route('/add_crypto', methods=['POST'])(self.add_crypto)
         self.app.route('/delete_crypto', methods=['POST'])(self.delete_crypto)
+        self.app.route('/news')(self.display_news)
+
 
 
     def __enter__(self):
@@ -196,6 +198,7 @@ class StockPortfolioApp:
         # Assuming you have a method called 'get_cryptocurrencies' in your 'db_manager' to fetch the user's cryptocurrencies
         cryptocurrencies = self.db_manager.get_cryptocurrencies(user_id)
 
+
         # Pass both stocks and cryptocurrencies to the dashboard.html template
         return render_template('dashboard.html', stocks=stocks, cryptocurrencies=cryptocurrencies)
 
@@ -252,6 +255,12 @@ class StockPortfolioApp:
         }
 
         return jsonify(data)
+
+
+    def display_news(self):
+        news_items = self.db_manager.get_all_news()
+        return render_template('news.html', news_items=news_items)
+
     
 if __name__ == "__main__":
     app_instance = StockPortfolioApp()
