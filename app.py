@@ -4,6 +4,8 @@ import requests
 from flask.views import MethodView
 from werkzeug.security import generate_password_hash, check_password_hash
 from db_manager import DatabaseManager
+from datetime import datetime
+
 
 class StockPortfolioApp:
     API_KEY = "YOUR_ALPHA_VANTAGE_API_KEY"
@@ -26,8 +28,6 @@ class StockPortfolioApp:
         self.app.route('/add_crypto', methods=['POST'])(self.add_crypto)
         self.app.route('/delete_crypto', methods=['POST'])(self.delete_crypto)
         self.app.route('/news')(self.display_news)
-
-
 
     def __enter__(self):
         return self
@@ -256,10 +256,10 @@ class StockPortfolioApp:
 
         return jsonify(data)
 
-
+        # Format the news data for display
     def display_news(self):
-        news_items = self.db_manager.get_all_news()
-        return render_template('news.html', news_items=news_items)
+        news = self.db_manager.get_all_news()   
+        return render_template('news.html', news=news)
 
     
 if __name__ == "__main__":

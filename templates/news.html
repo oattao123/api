@@ -1,4 +1,3 @@
-<!-- news.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,12 +24,12 @@
 <body>
     <h1>ข่าวล่าสุด</h1>
     <ul>
-        {% for news in news_items %}
+        {% for news in news %}
         <li>
-            <h2>{{ news.title }}</h2>
-            <p>{{ news.content }}</p>
-            <small>วันที่เผยแพร่: {{ news.date_published }}</small><br>
-            <small>สินทรัพย์ที่เกี่ยวข้อง: {{ news.related_asset }}</small>
+            <h2>{{ news['title'] }}</h2>
+            <p>{{ news['content'] }}</p>
+            <small>วันที่เผยแพร่: {{ news['date_published'] }}</small><br>
+            <small>สินทรัพย์ที่เกี่ยวข้อง: {{ news['related_asset'] }}</small>
         </li>
         {% endfor %}
     </ul>

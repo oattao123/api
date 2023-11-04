@@ -9,6 +9,21 @@ connection = mysql.connector.connect(
 
 cursor = connection.cursor()
 
+# create news table
+cursor.execute("""
+    CREATE TABLE news (
+    news_id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    author_name VARCHAR(255),
+    author_image VARCHAR(255),
+    date_published DATE NOT NULL,
+    short_description TEXT,
+    full_content TEXT,
+    category VARCHAR(255),
+    cover_image VARCHAR(255),
+    related_asset VARCHAR(255))
+""");
+
 # Create users table with an added email field
 cursor.execute("""
 CREATE TABLE users (

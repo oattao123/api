@@ -162,14 +162,16 @@ class DatabaseManager:
     def get_all_transactions(self):
         self.cursor.execute("SELECT * FROM transactions")
         return [dict(zip([column[0] for column in self.cursor.description], row)) for row in self.cursor.fetchall()]
-    def get_all_news(self):
-        self.cursor.execute("SELECT * FROM news")
-        return [dict(zip([column[0] for column in self.cursor.description], row)) for row in self.cursor.fetchall()]
+    # def get_all_news(self):
+    #     self.cursor.execute("SELECT * FROM news")
+    #     return [dict(zip([column[0] for column in self.cursor.description], row)) for row in self.cursor.fetchall()]
     def get_all_wallet(self):
         self.cursor.execute("SELECT * FROM wallet")
         return [dict(zip([column[0] for column in self.cursor.description], row)) for row in self.cursor.fetchall()]
     
-    
+    def get_all_news(self):
+        self.cursor.execute("SELECT * FROM news")
+        return [dict(zip([column[0] for column in self.cursor.description], row)) for row in self.cursor.fetchall()]
 
 
 
