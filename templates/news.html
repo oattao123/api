@@ -7,31 +7,78 @@
     <title>ข่าวล่าสุด</title>
     <!-- Add some basic CSS for better layout (optional) -->
     <style>
-        ul {
-            list-style-type: none;
-            padding: 0;
+        body {
+            font-family: Arial, sans-serif;
         }
-        li {
-            margin-bottom: 20px;
+        .news-container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .news-item {
             border-bottom: 1px solid #e1e1e1;
             padding-bottom: 20px;
+            margin-bottom: 20px;
         }
-        h2 {
-            margin-top: 0;
+        .news-item:last-child {
+            border-bottom: none;
+        }
+        .news-title {
+            color: #333;
+        }
+        .news-date {
+            color: #666;
+            font-size: 0.85em;
+        }
+        .news-author {
+            margin-bottom: 5px;
+            color: #666;
+        }
+        .news-content {
+            margin-bottom: 10px;
+        }
+        .news-category {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.75em;
+        }
+        .author-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        .cover-image {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>ข่าวล่าสุด</h1>
-    <ul>
-        {% for news in news %}
-        <li>
-            <h2>{{ news['title'] }}</h2>
-            <p>{{ news['content'] }}</p>
-            <small>วันที่เผยแพร่: {{ news['date_published'] }}</small><br>
-            <small>สินทรัพย์ที่เกี่ยวข้อง: {{ news['related_asset'] }}</small>
-        </li>
-        {% endfor %}
-    </ul>
+    <div class="news-container">
+        <h1>ข่าวล่าสุด</h1>
+        <ul>
+            {% for item in news %}
+            <li class="news-item">
+                <span class="news-category">{{ item['category'] }}</span>
+                <h2 class="news-title">{{ item['title'] }}</h2>
+                <div>
+                    <img src="{{ item['author_image'] }}" alt="Author image" class="author-image">
+                    <span class="news-author">{{ item['author_name'] }}</span>
+                </div>
+                <img src="{{ item['cover_image'] }}" alt="Cover image" class="cover-image">
+                <p class="news-content">{{ item['full_content'] }}</p>
+                <small class="news-date">วันที่เผยแพร่: {{ item['date_published'] }}</small>
+                {% if item['related_asset'] %}
+                    <br><small>สินทรัพย์ที่เกี่ยวข้อง: {{ item['related_asset'] }}</small>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>

@@ -173,6 +173,19 @@ class DatabaseManager:
         self.cursor.execute("SELECT * FROM news")
         return [dict(zip([column[0] for column in self.cursor.description], row)) for row in self.cursor.fetchall()]
 
+    def add_news(self, title, content, date_published, related_asset):
+        try:
+            self.cursor.execute("INSERT INTO news (title, content, date_published, related_asset) VALUES (%s, %s, %s, %s)", (title, content, date_published, related_asset))
+            self.connection.commit()
+        except Exception as e:
+            print(f"Error adding news: {e}") 
+    
+    def delete_news(self, news_id):
+        try:
+            self.cursor.execute("DELETE FROM news WHERE news_id=%s", (news_id,))
+            self.connection.commit()
+        except Exception as e:
+            print(f"Error deleting news: {e}")
 
 
     def close(self):

@@ -9,24 +9,9 @@ connection = mysql.connector.connect(
 
 cursor = connection.cursor()
 
-# create news table
+# Create users table with an added email field (if it doesn't already exist)
 cursor.execute("""
-    CREATE TABLE news (
-    news_id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    author_name VARCHAR(255),
-    author_image VARCHAR(255),
-    date_published DATE NOT NULL,
-    short_description TEXT,
-    full_content TEXT,
-    category VARCHAR(255),
-    cover_image VARCHAR(255),
-    related_asset VARCHAR(255))
-""");
-
-# Create users table with an added email field
-cursor.execute("""
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
     Firstname VARCHAR(255) NOT NULL,
@@ -36,9 +21,9 @@ CREATE TABLE users (
 )
 """)
 
-# Create stocks table
+# Create stocks table (if it doesn't already exist)
 cursor.execute("""
-CREATE TABLE stocks (
+CREATE TABLE IF NOT EXISTS stocks (
     stock_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     stock_name VARCHAR(255) NOT NULL,
@@ -47,9 +32,9 @@ CREATE TABLE stocks (
 )
 """)
 
-# Create cryptocurrencies table
+# Create cryptocurrencies table (if it doesn't already exist)
 cursor.execute("""
-CREATE TABLE cryptocurrencies (
+CREATE TABLE IF NOT EXISTS cryptocurrencies (
     crypto_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     crypto_name VARCHAR(255) NOT NULL,
@@ -58,9 +43,9 @@ CREATE TABLE cryptocurrencies (
 )
 """)
 
-# Transactions Table
+# Create transactions Table (if it doesn't already exist)
 cursor.execute("""
-CREATE TABLE transactions (
+CREATE TABLE IF NOT EXISTS transactions (
     transaction_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     asset_type VARCHAR(255) NOT NULL,  # e.g. 'stock', 'crypto'
@@ -71,9 +56,9 @@ CREATE TABLE transactions (
 )
 """)
 
-# News Table
+# Create news Table (if it doesn't already exist)
 cursor.execute("""
-CREATE TABLE news (
+CREATE TABLE IF NOT EXISTS news (
     news_id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
@@ -82,9 +67,9 @@ CREATE TABLE news (
 )
 """)
 
-# Wallet Table
+# Create wallet Table (if it doesn't already exist)
 cursor.execute("""
-CREATE TABLE wallet (
+CREATE TABLE IF NOT EXISTS wallet (
     wallet_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     asset_type VARCHAR(255) NOT NULL,  # e.g. 'stock', 'crypto'
@@ -96,4 +81,4 @@ CREATE TABLE wallet (
 
 connection.commit()
 cursor.close()
-connection.close()  # Note: There was a typo in your original code. It should be "close()" not "Close()".
+connection.close()

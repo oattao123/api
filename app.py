@@ -28,6 +28,7 @@ class StockPortfolioApp:
         self.app.route('/add_crypto', methods=['POST'])(self.add_crypto)
         self.app.route('/delete_crypto', methods=['POST'])(self.delete_crypto)
         self.app.route('/news')(self.display_news)
+        self.app.route('/add_news', methods=['GET', 'POST'])(self.adds_news)
 
     def __enter__(self):
         return self
@@ -260,6 +261,18 @@ class StockPortfolioApp:
     def display_news(self):
         news = self.db_manager.get_all_news()   
         return render_template('news.html', news=news)
+    
+    def adds_news(self):
+        if request.method == 'POST':
+            title = request.form['title']
+            content = request.form['content']
+            date_published = request.form['date_published']
+            related_asset = request.form['related_asset']
+
+            self.db_manager.add_news(title, content, date_published, related_asset)
+            return redirect(url_for('display_news'))
+        return render_template('add_news.html')
+
 
     
 if __name__ == "__main__":
