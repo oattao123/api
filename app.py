@@ -5,13 +5,14 @@ from flask.views import MethodView
 from werkzeug.security import generate_password_hash, check_password_hash
 from db_manager import DatabaseManager
 from datetime import datetime
-
+from flask_cors import CORS
 
 class StockPortfolioApp:
     API_KEY = "YOUR_ALPHA_VANTAGE_API_KEY"
 
     def __init__(self):
         self.app = Flask(__name__)
+        CORS(self.app)
         self.app.secret_key = 'some_random_string'
         self.db_manager = DatabaseManager(self)
 
@@ -93,6 +94,7 @@ class StockPortfolioApp:
                 return "Username already exists!", 400
 
         return render_template('sign_in.html')
+
     
     def calculate(self):
         username = request.form['username']
@@ -127,6 +129,25 @@ class StockPortfolioApp:
             self.db_manager.add_stock(user_id, stock_name, stock_quantity)
 
         return redirect(url_for('dashboard'))
+    def add_stock(self):
+        if 'user_id' not in session:
+            return jsonify({"error": "User not logged in"}), 403
+
+        # Get JSON data from the request
+        data = request.get_json()
+        user_id = session['user_id']
+        stock_name = data['stock_name']
+        stock_quantity = int(data['stock_quantity'])
+
+        existing_stock = self.db_manager.get_specific_stock(user_id, stock_name)
+        if existing_stock:
+            new_quantity = existing_stock[1] + stock_quantity
+            self.db_manager.update_stock(user_id, stock_name, new_quantity)
+        else:
+            self.db_manager.add_stock(user_id, stock_name, stock_quantity)
+
+        # Return a JSON response
+        return jsonify({"message": "Stock added successfully"}), 200
 
 
     def delete_stock(self):
