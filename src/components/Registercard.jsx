@@ -25,12 +25,12 @@ export const Registercard = () => {
             myHeaders.append("Content-Type", "application/json");
 
             var raw = JSON.stringify({
-            "fname": inputs.fname,
-            "lname": inputs.lname,
+            "fisrt_name": inputs.fname,
+            "last_name": inputs.lname,
             "username": inputs.username,
             "password": inputs.password,
             "email":    inputs.email,
-            "avatar":   inputs.avatar
+            
             });
 
             var requestOptions = {
