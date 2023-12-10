@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ข่าวล่าสุด</title>
+    <!-- Add some basic CSS for better layout (optional) -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="date"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .news-item {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+        .news-title {
+            font-size: 20px;
+        }
+        .news-content {
+            margin-top: 10px;
+        }
+        .edit-link, .delete-form {
+            margin-top: 10px;
+        }
+        .delete-form button {
+            background-color: #dc3545;
+        }
+        .delete-form button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Add News</h2>
+        <form action="/add_news" method="post">
+            <input type="text" name="title" placeholder="Title" required>
+            <textarea name="content" placeholder="Content" required></textarea>
+            <input type="text" name="date_published" placeholder="Date" required>
+            <input type="text" name="related_asset" placeholder="Related Asset">
+            <input type="text" name="cover_image" placeholder="Cover Image URL">
+            <input type="text" name="author_name" placeholder="Author Name">
+            <input type="text" name="author_image" placeholder="Author Image URL">
+            <button type="submit">Submit</button>
+        </form>
+
+        <h2>Existing News</h2>
+        <div id="newsList">
+            {% for news_item in news %}
+            <div class="news-item">
+                <h3 class="news-title">{{ news_item.title }}</h3>
+                <p class="news-content">{{ news_item.content }}</p>
+                <a href="/edit_news?news_id={{ news_item.id }}" class="edit-link">Edit</a>
+                <form action="/delete_news" method="post">
+                    <input type="hidden" name="news_id" value="{{ news_item.id }}">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="news-container">
+        <h1>ข่าวล่าสุด</h1>
+        <ul>
+            {% for item in news %}
+            <li class="news-item">
+                <span class="news-category">{{ item['category'] }}</span>
+                <h2 class="news-title">{{ item['title'] }}</h2>
+                <div>
+                    <img src="{{ item['author_image'] }}" alt="Author image" class="author-image">
+                    <span class="news-author">{{ item['author_name'] }}</span>
+                </div>
+                <img src="{{ item['cover_image'] }}" alt="Cover image" class="cover-image">
+                <p class="news-content">{{ item['full_content'] }}</p>
+                <small class="news-date">วันที่เผยแพร่: {{ item['date_published'] }}</small>
+                {% if item['related_asset'] %}
+                    <br><small>สินทรัพย์ที่เกี่ยวข้อง: {{ item['related_asset'] }}</small>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
