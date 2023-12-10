@@ -7,153 +7,114 @@ import { useNavigate } from 'react-router-dom';
 
 
 export const Registercard = () => {
-
-    const [inputs, setInputs] = useState({});
+    const [inputs, setInputs] = useState({
+        email: '',
+        fname: '',
+        lname: '',
+        username: '',
+        password: ''
+    });
     const navigate = useNavigate();
 
     const handleChange = (event) => {
-      const name = event.target.name;
-      const value = event.target.value;
-      setInputs(values => ({...values, [name]: value}))
+        const { name, value } = event.target;
+        setInputs(prevState => ({ ...prevState, [name]: value }));
     }
-  
+
     const handleSubmit = (event) => {
-      event.preventDefault();
-     
+        event.preventDefault();
 
-        var myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-
-            var raw = JSON.stringify({
-            "fisrt_name": inputs.fname,
-            "last_name": inputs.lname,
-            "username": inputs.username,
-            "password": inputs.password,
-            "email":    inputs.email,
-            
-            });
-
-            var requestOptions = {
+        const requestOptions = {
             method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-            };
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                first_name: inputs.fname,
+                last_name: inputs.lname,
+                username: inputs.username,
+                password: inputs.password,
+                email: inputs.email,
+            })
+        };
 
-            fetch("http://127.0.0.1:5000/sign_in", requestOptions)
+        fetch(`${process.env.REACT_APP_API_URL}/sign_in`, requestOptions)
             .then(response => response.json())
-            .then(result => { if (result.status === 'ok') 
-            {
-              Swal.fire({
-                title: "Good job!",
-                text: "Register success!",
-                icon: "success"
-              }).then((value) => {
-                localStorage.setItem('token',result.accessToken)
-                navigate('/profile')});
-            } 
-            else 
-            {
-            console.log(result.message);
-              Swal.fire({
-                title: "Oops!",
-                text: "Something went wrong!",
-                icon: "error"
-              });
-            }}
-            )
-            .catch(error => console.log('error', error));
-    }
-
-
+            .then(result => {
+                if (result.message === 'User registered successfully') {
+                    Swal.fire('Good job!', 'Register success!', 'success')
+                        .then(() => navigate('/profile'));
+                } else {
+                    Swal.fire('Oops!', result.error || 'Something went wrong!', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire('Oops!', 'Network error or server is down', 'error');
+            });
+    };
 
     return (
-      <>
-       <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
+            <div className="flex border-2 w-[632px] h-[625px] flex-col mx-auto mt-[130px] bg-[#F5F4F4] rounded-md">
+                <h1 className="text-center text-5xl p-[25px]">Sign up</h1>
+                <div className="ml-auto mr-auto gap-10">
+                    {/* Input fields here */}
+                    {/* Email Input */}
+                    <div className="form-control mb-3">
+                        <label className="label">
+                            <span className="label-text">Email</span>
+                        </label>
+                        <input value={inputs.email} onChange={handleChange} name="email" type="text" placeholder="Enter your email" className="input input-bordered h-[60px] w-[535px]" />
+                    </div>
 
+                    {/* First Name and Last Name Inputs */}
+                    <div className="form-control mb-3 flex-row gap-[35px]">
+                        {/* First Name Input */}
+                        <div>
+                            <label className="label">
+                                <span className="label-text">Name</span>
+                            </label>
+                            <input value={inputs.fname} onChange={handleChange} name='fname' type="text" placeholder="First name" className="input input-bordered w-[250px]" />
+                        </div>
+                        {/* Last Name Input */}
+                        <div>
+                            <label className="label">
+                                <span className="label-text">Surname</span>
+                            </label>
+                            <input value={inputs.lname} onChange={handleChange} name='lname' type="text" placeholder="Last name" className="input input-bordered w-[250px]" />
+                        </div>
+                    </div>
 
-<div className="flex border-2 w-[632px] h-[625px] flex-col mx-auto mt-[130px] bg-[#F5F4F4] rounded-md">
-    <h1 className="text-center text-5xl p-[25px]">Sign up</h1>
-    <div className="ml-auto mr-auto gap-10">
-      <div className="form-control mb-3">
-          <label className="label">
-            <span className="label-text">Email</span>
-          
-          </label>
-          <input value={inputs.email || ""} 
-    onChange={handleChange} name="email" type="text" placeholder="Enter your email" className="input input-bordered h-[60px] w-[535px]" />
-          
-      </div>
+                    {/* Username Input */}
+                    <div className="form-control m-auto">
+                        <label className="label">
+                            <span className="label-text">Username</span>
+                        </label>
+                        <input value={inputs.username} onChange={handleChange} name="username" type="text" placeholder="Username" className="input input-bordered h-[60px] w-[535px]" />
+                    </div>
 
-      <div className="form-control mb-3 flex-row gap-[35px]">
-         <div>
-            <label className="label">
-                <span className="label-text">Name</span>
-            
-            </label>
-            <input value={inputs.fname || ""} 
-    onChange={handleChange} name='fname' type="text" placeholder="First name" className="input input-bordered w-[250px]" />
-          
-          
-         </div>
-         <div>
-            <label className="label">
-                <span className="label-text">Surname</span>
-            
-            </label>
-            <input value={inputs.lname || ""} 
-    onChange={handleChange} type="text" name='lname' placeholder="Last name" className="input input-bordered w-[250px]" />
-          
-          
-         </div>
-      </div>
+                    {/* Password Input */}
+                    <div className="form-control mb-3">
+                        <label className="label">
+                            <span className="label-text">Password</span>
+                        </label>
+                        <input value={inputs.password} onChange={handleChange} name='password' type="password" placeholder="Enter your password" className="input input-bordered h-[60px] w-[535px]" />
+                    </div>
 
-      <div className="form-control m-auto">
-          <label className="label">
-            <span className="label-text">username</span>
-          
-          </label>
-          <input value={inputs.username || ""} 
-    onChange={handleChange} type="text" name="username" placeholder="Username" className="input input-bordered h-[60px] w-[535px] " />
-          
-      </div>
+                    {/* Submit Button */}
+                    <div className="flex ml-auto mr-auto mt-5 mb-1">
+                        <input className="text-[25px] w-[150px] h-[60px] bg-[#B52245] rounded-full text-white border-[#B52245]" type="submit" value="Sign up" />
+                    </div>
 
-      <div className="form-control mb-3">
-          <label className="label">
-            <span className="label-text">Password</span>
-          
-          </label>
-          <input value={inputs.password || ""} 
-    onChange={handleChange} type="password" name='password' placeholder="Enter your password" className="input input-bordered h-[60px] w-[535px] " />
-          
-      </div>
-  
-  
-     
-    </div>
-   
-    <div className="flex ml-auto mr-auto mt-5 mb-1">
-       
-        <input className=" text-[25px] w-[150px] h-[60px] bg-[#B52245] rounded-full text-white border-[#B52245]" type="submit" value="Sign up"/>
-    </div>
-    <div className="text-center">
-        <Link className="text-center" to="/">Don't have an account? <span className="underline hover:decoration-2">Sign up</span></Link>
-    </div>
+                    {/* Link to Login Page */}
+                    <div className="text-center">
+                        <Link to="/">Don't have an account? <span className="underline hover:decoration-2">Sign up</span></Link>
+                    </div>
+                </div>
+            </div>
+        </form>
+    );
+}
 
-
-
-    </div>
-
-
-</form>
-       
-
-
-   
-    
-      </>
-    )
-  }
   
 /* 
 
