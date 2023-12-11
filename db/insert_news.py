@@ -9,11 +9,11 @@ def parse_date(date_string):
 news_data = [
     {
         "id": 2,
-        "cover": "../images/hero/hero1.jpg",
+        "cover": "https://upload.wikimedia.org/wikipedia/commons/3/35/Author_Photograph.jpg",
         "catgeory": "featured",
         "title": "Google To Boost Android Security In Few Days",
         "authorName": "Salman",
-        "authorImg": "../images/author.jpg",
+        "authorImg": "https://upload.wikimedia.org/wikipedia/commons/3/35/Author_Photograph.jpg",
         "time": "5 Jun - 2022",
         "desc": [
             {"para1": "You audience. Least, the recently his repeat the this avarice for the have and was on would before the concise bedding were hall politely name be regretting have of even five of it the his are there again. Word seven designer far lady problem will have work with you to fully understand your business to achieve."},

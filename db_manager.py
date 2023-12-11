@@ -172,23 +172,24 @@ class DatabaseManager:
         return [dict(zip([column[0] for column in self.cursor.description], row)) for row in self.cursor.fetchall()]
 
     def add_news(self, news_data):
-        # ตรวจสอบว่า news_data เป็น dictionary หรือ list ของ dictionaries
+        # Check if news_data is a dictionary or a list of dictionaries
         if isinstance(news_data, dict):
-            # แปลง dictionary เป็น list ของ dictionary เดียว
             news_data = [news_data]
 
-        # คำสั่ง SQL สำหรับเพิ่มข้อมูลข่าวใหม่
-        add_news_query = ("INSERT INTO news "
-                          "(title, author_name, author_image, date_published, short_description, full_content, category, cover_image, related_asset) "
-                          "VALUES (%(title)s, %(author_name)s, %(author_image)s, %(date_published)s, %(short_description)s, %(full_content)s, %(category)s, %(cover_image)s, %(related_asset)s)")
+        # SQL query to insert new news data
+        add_news_query = (
+            "INSERT INTO news "
+            "(title, author_name, author_image, date_published, short_description, full_content, category, cover_image, related_asset) "
+            "VALUES (%(title)s, %(author_name)s, %(author_image)s, %(date_published)s, %(short_description)s, %(full_content)s, %(category)s, %(cover_image)s, %(related_asset)s)"
+        )
 
-        # ฟังก์ชันช่วยเหลือสำหรับแปลงวันที่
+        # Helper function to parse the date
         def parse_date(date_string):
             return datetime.strptime(date_string, '%d %b - %Y').strftime('%Y-%m-%d')
 
         for news_item in news_data:
             if isinstance(news_item, dict):
-                # ตรวจสอบและจัดการข้อมูลใน 'desc' และ 'details'
+                # Process 'desc' and 'details' data
                 full_content = ''
                 if 'desc' in news_item and isinstance(news_item['desc'], list):
                     full_content += ' '.join(para.get('para1', '') if isinstance(para, dict) else para for para in news_item['desc'])
@@ -196,58 +197,39 @@ class DatabaseManager:
                 if 'details' in news_item and isinstance(news_item.get('details', []), list):
                     full_content += ' '.join(para.get('para1', '') if isinstance(para, dict) else para for para in news_item.get('details', []))
 
-                # สร้างคำอธิบายสั้นๆ และประเภทข่าว
+                # Create short description and category
                 short_description = news_item.get('short_description', '')
                 category = news_item.get('category', 'Unknown Category')
 
-                # ประกอบ dictionary ข้อมูลข่าว
+                # Create the news data dictionary
                 data_news = {
                     'title': news_item.get('title', ''),
                     'author_name': news_item.get('author_name', 'Unknown Author'),
                     'author_image': news_item.get('author_image', 'default_author_image.jpg'),
                     'date_published': parse_date(news_item.get('date_published', '')),
-                    'short_description': short_description,
-                    'full_content': full_content,
-                    'category': category,
+                    'short_description': short_description.get('para1', '') if isinstance(short_description, dict) else short_description,
+                    'full_content': full_content.get('para1', '') if isinstance(full_content, dict) else full_content,
+                    'category': category.get('category', '') if isinstance(category, dict) else category,
                     'cover_image': news_item.get('cover_image', 'default_cover_image.jpg'),
                     'related_asset': news_item.get('related_asset', None)
                 }
 
-                # ประมวลผลข้อมูลข่าวและเพิ่มลงฐานข้อมูล
                 try:
+                    # Execute the insert query
                     self.cursor.execute(add_news_query, data_news)
                     self.connection.commit()
                 except mysql.connector.Error as error:
                     print(f"Failed to insert news into MySQL table: {error}")
 
-    # def delete_news(self, news_id):
-    #     query = "DELETE FROM news WHERE news_id=%s"
-    #     try:
-    #         self.cursor.execute(query, (news_id,))
-    #         self.connection.commit()
-    #         return True  # การลบข้อมูลสำเร็จ
-    #     except Exception as e:
-    #         print(f"Error deleting news: {e}")
-    #         return False  # การลบข้อมูลล้มเหลว
-    def delete_news(self, news_id):
+    def delete_news_by_title(self, title):
         try:
-            query = "DELETE FROM news WHERE id=%s"  # Ensure the column name is 'id' in your database
-            self.cursor.execute(query, (news_id,))
+            self.cursor.execute("DELETE FROM news WHERE title=%s", (title,))
             self.connection.commit()
-            return True  # Return True to indicate successful deletion
+            return True
         except Exception as e:
             print(f"Error deleting news: {e}")
-            return False  # Return False if the operation fails
+            return False
 
-    def edit_news(self, news_id, title, content, date_published, related_asset, cover_image, author_name, author_image):
-        query = "UPDATE news SET title=%s, content=%s, date_published=%s, related_asset=%s, cover_image=%s, author_name=%s, author_image=%s WHERE news_id=%s"
-        try:
-            self.cursor.execute(query, (title, content, date_published, related_asset, cover_image, author_name, author_image, news_id))
-            self.connection.commit()
-            return True  # การแก้ไขข้อมูลสำเร็จ
-        except Exception as e:
-            print(f"Error editing news: {e}")
-            return False  # การแก้ไขข้อมูลล้มเหลว
 
 
     def close(self):

@@ -29,7 +29,8 @@ class StockPortfolioApp:
         self.app.route('/news')(self.display_news)
         self.app.route('/add_news', methods=['GET', 'POST'])(self.add_news)
         self.app.route('/delete_news',methods=['POST'])(self.delete_news)
-        self.app.route('/edit_news', methods=['GET', 'POST'])(self.edit_news)
+        self.app.route('/manager_news')(self.manager_news)
+        # self.app.route('/edit_news', methods=['GET', 'POST'])(self.edit_news)
 
 
     def __enter__(self):
@@ -265,6 +266,9 @@ class StockPortfolioApp:
         news = self.db_manager.get_all_news()
         return render_template('news.html', news=news)
 
+    def manager_news(self):
+        news = self.db_manager.get_all_news()
+        return render_template('manager_news.html', news=news)
     # ฟังก์ชันสำหรับเพิ่มข่าว
     def add_news(self):
         if request.method == 'POST':
@@ -275,32 +279,27 @@ class StockPortfolioApp:
                 'related_asset': request.form['related_asset'],
                 'cover_image': request.form.get('cover_image', 'default_cover_image.jpg'),
                 'author_name': request.form.get('author_name', 'Unknown Author'),
-                'author_image': request.form.get('author_image', 'default_author_image.jpg')
+                'author_image': request.form.get('author_image', 'default_author_image.jpg'),
+                'category': request.form.get('category', 'General'),
+                'short_description': request.form.get('short_description', 'No description available.'),
+                'full_description': request.form.get('full_description', 'No description available.'),
             }
 
             self.db_manager.add_news(news_data)
-            return redirect(url_for('display_news'))
+            return redirect(url_for('manager_news'))
         else:
             # รหัสสำหรับแสดงหน้าเพิ่มข่าว
             news = self.db_manager.get_all_news()
-            return render_template('news.html', news=news)
+            return render_template('manager_news.html', news=news)
 
     def delete_news(self):
-        if request.method == 'POST':
-            news_id = request.form['news_id']
-            self.db_manager.delete_news(news_id)
-            return redirect(url_for('display_news'))
+        title = request.form['title']
+        success = self.db_manager.delete_news_by_title(title)
+        if success:
+            return redirect(url_for('manager_news'))
+        else:
+            return "Error deleting news", 500
 
-    # ฟังก์ชันสำหรับแก้ไขข่าว
-    def edit_news(self):
-        if request.method == 'POST':
-            news_id = request.form['news_id']
-            new_title = request.form['new_title']
-            new_content = request.form['new_content']
-            new_date_published = request.form['new_date_published']
-            new_related_asset = request.form['new_related_asset']
-            self.db_manager.edit_news(news_id, new_title, new_content, new_date_published, new_related_asset)
-            return redirect(url_for('display_news'))
 
 
 

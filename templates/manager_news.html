@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ข่าวล่าสุด</title>
+    <title>จัดการข่าว</title>
     <!-- Add some basic CSS for better layout (optional) -->
     <style>
         body {
@@ -135,28 +135,6 @@
             </div>
             {% endfor %}
         </div>
-    </div>
-
-    <div class="news-container">
-        <h1>ข่าวล่าสุด</h1>
-        <ul>  
-            {% for item in news %}
-            <li class="news-item">
-                <span class="news-category">{{ item['category'] }}</span>
-                <h2 class="news-title">{{ item['title'] }}</h2>
-                <div>
-                    <img src="{{ item['author_image'] }}" alt="Author image" class="author-image">
-                    <span class="news-author">{{ item['author_name'] }}</span>
-                </div>
-                <img src="{{ item['cover_image'] }}" alt="Cover image" class="cover-image">
-                <p class="news-content">{{ item['short_description'] }}</p>
-                <small class="news-date">วันที่เผยแพร่: {{ item['date_published'] }}</small>
-                {% if item['related_asset'] %}
-                    <br><small>สินทรัพย์ที่เกี่ยวข้อง: {{ item['related_asset'] }}</small>
-                {% endif %}
-            </li>
-            {% endfor %}
-        </ul>
     </div>
 </body>
 </html>
