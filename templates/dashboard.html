@@ -4,63 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <title>User Dashboard</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
-        h2 {
-            text-align: center;
-            padding: 20px;
-            background-color: #333;
-            color: #fff;
-        }
-
-        table {
-            width: 80%;
-            margin: 20px auto;
-            border-collapse: collapse;
-            background-color: #ffffff;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-        }
-
-        th, td {
-            padding: 10px 20px;
-        }
-
-        th {
-            background-color: #4CAF50;
-            color: #ffffff;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        a {
-            display: block;
-            width: 100px;
-            margin: 20px auto;
-            padding: 10px;
-            text-align: center;
-            background-color: #4CAF50;
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-
-        a:hover {
-            background-color: #45a049;
-        }
-    </style>
+   
 </head>
 <body>
-
+    <nav class="">
+        <div class="navbar bg-base-100 bg-whtie justify-between flex shadow-md">
+            <div class="flex ">
+                    <div class="flex flex-row ">
+                      <img class="w-[68px] h-[59px]" src="/asset/logo.png" alt="logo" />
+                      <h1 class=" text-[#B52245] text-[30px] my-auto">BIZ-NA</h1> 
+                    </div>
+                    <ul class="flex flex-column gap-10 ml-10">
+                      <li class="my-auto">
+                        <a class="text-black text-[30px] " href="{{ url_for('calculate') }}" >Market</a>
+                      </li>
+                      <li  class="m-3">
+                        <a class="text-black text-[30px] pl-4 pr-4 pt-2 pb-2 pointer" href="{{ url_for('display_news') }}">News</a>
+                      </li>
+                    </ul>
+                   
+            </div>
+            <div class="  my-auto">
+                    <a class="text-black text-[25px] pl-4 pr-4 pt-2 pb-2" href="/">Login</a>
+                    <a class="text-white text-[25px] bg-[#B52245] pl-4 pr-4 pt-2 pb-2 rounded-full" id="Register" href="/sign_in">Logout</a>
+            </div>
+                 
+        </div>
+       
+    </nav>
 <h2>User Dashboard</h2>
 
 <table border="1">

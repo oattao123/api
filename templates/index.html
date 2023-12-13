@@ -4,32 +4,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <title>Login</title>
 </head>
 
-<body class="bg-light py-5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header bg-primary text-white">Login</div>
-                    <div class="card-body">
+<body class="">
+    <nav class="">
+        <div class="navbar bg-base-100 bg-whtie justify-between flex shadow-md">
+            <div class="flex ">
+                    <div class="flex flex-row ">
+                      <img class="w-[68px] h-[59px]" src="/asset/logo.png" alt="logo" />
+                      <h1 class=" text-[#B52245] text-[30px] my-auto">BIZ-NA</h1> 
+                    </div>
+                    <ul class="flex flex-column gap-10 ml-10">
+                      <li class="my-auto">
+                        <a class="text-black text-[30px] " >Market</a>
+                      </li>
+                      <li  class="m-3">
+                        <a class="text-black text-[30px] pl-4 pr-4 pt-2 pb-2 pointer" >News</a>
+                      </li>
+                    </ul>
+                   
+            </div>
+            <div class="  my-auto">
+                    <a class="text-black text-[25px] pl-4 pr-4 pt-2 pb-2" href="/">Login</a>
+                    <a class="text-white text-[25px] bg-[#B52245] pl-4 pr-4 pt-2 pb-2 rounded-full" id="Register" href="/sign_in">Sign up</a>
+            </div>
+                 
+        </div>
+       
+    </nav>
+    <div class="">
+        <div class="">
+            <div class=" ">
+                <div class="border xl:mx-[650px] lg:mx-[350px] my-[114px] bg-[#f5f4f4] rounded-xl shadow-md sm:mx-[100px] md:mx-[300px]">
+                    <div class="text-center text-[50px]">Login</div>
+                    <div class="">
                         
                         <!-- <form action="/calculate" method="post"> -->
                             <form action="{{ url_for('calculate', username=username) }}" method="post">
-                            <div class="form-group">
-                                <label for="username">Username:</label>
-                                <input type="text" name="username" class="form-control" required>
+                            <div class="mx-6 my-4 flex flex-col">
+                                <label for="username">Username</label>
+                                <input  type="text" placeholder="Input you username" name="username" class="input input-bordered h-[60px] w-full" required>
                             </div>
-                            <div class="form-group">
-                                <label for="password">Password:</label>
-                                <input type="password" name="password" class="form-control" required>
+                            <div class="mx-6 my-4 flex flex-col">
+                                <label for="password">Password</label>
+                                <input type="password" placeholder="Input you password" name="password" class="input input-bordered h-[60px] w-full" required>
                             </div>
-                            <button type="submit" class="btn btn-success mb-2">login</button>
-                            <a href="/sign_in" class="btn btn-secondary mb-2">Sign In</a>
-                            <!-- Button to redirect to change password page -->
-                            <a href="/change_password" class="btn btn-warning">forget password</a>
+                          <div class="text-center">
+                            <button class="m-2 btn text-[25px] w-[150px] h-[60px] bg-[#B52245] rounded-full text-white border-[#B52245] mb-5" type="submit" class="">login</button>
+                          </div>
+                           <div class="text-center mb-2">
+                               
+                                <!-- Button to redirect to change password page -->
+                            <span>Don't have account? <a href="/change_password" class="text-[#1260cc]">forget password</a></span>
+                           </div>
                         </form>
                     </div>
                 </div>

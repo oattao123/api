@@ -9,7 +9,7 @@ class DatabaseManager:
         self.connection = mysql.connector.connect(
             host="localhost",
             user="root",
-            password="@oattao@123",
+            password="12345678",
             database="StockPortfolio_main"
         )
         self.cursor = self.connection.cursor()
