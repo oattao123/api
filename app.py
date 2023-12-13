@@ -32,6 +32,8 @@ class StockPortfolioApp:
         self.app.route('/manager_news')(self.manager_news)
         # self.app.route('/edit_news', methods=['GET', 'POST'])(self.edit_news)
 
+       
+
 
     def __enter__(self):
         return self
@@ -39,6 +41,10 @@ class StockPortfolioApp:
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.cursor.close()
         self.connection.close()
+
+   
+  
+            
 
     def get_stock_price(self, symbol):
         BASE_URL = "https://www.alphavantage.co/query"
