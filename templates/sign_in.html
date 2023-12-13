@@ -3,53 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+   
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <title>Sign In</title>
 </head>
-<body class="bg-light py-5">
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header bg-info text-white">Sign In</div>
-                <div class="card-body">
-                    <form action="/sign_in" method="post">
+<body class="">
+<nav class="">
+    <div class="navbar bg-base-100 bg-whtie justify-between flex shadow-md">
+        <div class="flex ">
+                <div class="flex flex-row ">
+                    <img class="w-[68px] h-[59px]" src="https://raw.githubusercontent.com/oattao123/project_oopdatabase/Ui/asset/logo.png" alt="logo" />
+                  <h1 class=" text-[#B52245] text-[30px] my-auto">BIZ-NA</h1> 
+                </div>
+                <ul class="flex flex-column gap-10 ml-10">
+                  <li class="my-auto">
+                    <a class="text-black text-[30px] " >Market</a>
+                  </li>
+                  <li  class="m-3">
+                    <a class="text-black text-[30px] pl-4 pr-4 pt-2 pb-2 pointer" href="{{ url_for('display_news') }}">News</a>
+                  </li>
+                </ul>
+               
+        </div>
+        <div class="  my-auto">
+                <a class="text-black text-[25px] pl-4 pr-4 pt-2 pb-2" href="/">Login</a>
+                <a class="text-white text-[25px] bg-[#B52245] pl-4 pr-4 pt-2 pb-2 rounded-full" id="Register" href="/sign_in">Sign up</a>
+        </div>
+             
+    </div>
+   
+</nav>
+<div class="">
+        
+            <div class="border mx-[650px] my-[114px] bg-[#f5f4f4] rounded-xl shadow-md ">
+                <div class="text-center text-[50px] p-[15px]">Sign Up</div>
+                <div class="">
+                    <form class="flex flex-col gap-4" action="/sign_in" method="post">
                         <!-- Username field -->
-                        <div class="form-group">
-                            <label for="username">Username:</label>
-                            <input type="text" name="username" class="form-control" required>
+                        <div class="flex-col flex mx-6  m">
+                            <label  for="username">Username</label>
+                            <input class="input input-bordered h-[60px] w-full" placeholder="Input your username" type="text" name="username" class="form-control" required>
                         </div>
                         <!-- First Name field -->
-                        <div class="form-group">
-                            <label for="first_name">First Name:</label>
-                            <input type="text" name="first_name" placeholder="First Name" class="form-control" required>
-                        </div>
-                        <!-- Last Name field -->
-                        <div class="form-group">
-                            <label for="last_name">Last Name:</label>
-                            <input type="text" name="last_name" placeholder="Last Name" class="form-control" required>
+                        <div class="flex mx-6 gap-4 ">
+                            <div class="">
+                                <label for="first_name">First Name</label>
+                                <input class="h-[60px] input input-bordered w-full " type="text" name="first_name" placeholder="First Name" class="form-control" required>
+                            </div>
+                            <!-- Last Name field -->
+                            <div class="">
+                                <label for="last_name">Last Name</label>
+                                <input class="h-[60px] input input-bordered w-full " type="text" name="last_name" placeholder="Last Name" class="form-control" required>
+                            </div>
                         </div>
                         <!-- Email field -->
-                        <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="email" name="email" class="form-control" required>
+                        <div class="flex-col flex mx-6  m">
+                            <label for="email">Email</label>
+                            <input class="input input-bordered h-[60px] w-full" placeholder="Input your email" type="email" name="email" class="form-control" required>
                         </div>
                         <!-- Password field -->
-                        <div class="form-group">
-                            <label for="password">Password:</label>
-                            <input type="password" name="password" class="form-control" required>
+                        <div class="flex-col flex mx-6  m">
+                            <label for="password">Password</label>
+                            <input class="input input-bordered h-[60px] w-full" placeholder="Input your password" type="password" name="password" class="form-control" required>
                         </div>
                         <!-- Confirm Password field -->
-                        <div class="form-group">
-                            <label for="confirm_password">Confirm Password:</label>
-                            <input type="password" name="confirm_password" class="form-control" required>
+                        <div class="flex-col flex mx-6  ml">
+                            <label for="confirm_password">Confirm Password</label>
+                            <input class="input input-bordered h-[60px] w-full" placeholder="Confirm password" type="password" name="confirm_password" class="form-control" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Sign in</button>
+                       <div class="text-center">
+                            <button class="btn text-[25px] w-[150px] h-[60px] bg-[#B52245] rounded-full text-white border-[#B52245] mb-5" type="submit" class="">Sign in</button>
+                       </div>
                     </form>
+                    
                 </div>
             </div>
-        </div>
-    </div>
+        
+   
 </div>
 </body>
 </html>

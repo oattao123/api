@@ -16,6 +16,7 @@ class StockPortfolioApp:
 
         # Routes
         self.app.route('/')(self.login)
+        self.app.route('/login', methods=['GET', 'POST'])(self.login)
         self.app.route('/sign_in', methods=['GET', 'POST'])(self.sign_in)
         self.app.route('/calculate', methods=['POST'])(self.calculate)
         self.app.route('/add_stock', methods=['POST'])(self.add_stock)

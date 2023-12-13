@@ -4,137 +4,82 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>จัดการข่าว</title>
     <!-- Add some basic CSS for better layout (optional) -->
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            color: #333;
-        }
-        form {
-            margin-bottom: 20px;
-        }
-        input[type="text"], input[type="date"], textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-        button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .news-item {
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            padding: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-
-        .news-title {
-            color: #007bff;
-            font-size: 24px;
-            margin-top: 0;
-        }
-        .news-content {
-            color: #555;
-            font-size: 16px;
-        }
-        .edit-link, .delete-form {
-            margin-top: 10px;
-        }
-        .delete-form button {
-            background-color: #dc3545;
-        }
-        .delete-form button:hover {
-            background-color: #c82333;
-        }
-        .author-image {
-        width: 50px;  /* Adjust width as needed */
-        height: auto; /* Keeps the aspect ratio intact */
-        border-radius: 50%; /* Makes the image round */
-        margin-right: 10px;
-         }
-
-        .cover-image {
-            width: 20%; /* Full width of its container */
-            height: auto; /* Keeps the aspect ratio intact */
-            margin-top: 10px;
-        }
-        .news-author, .news-date, .news-category {
-            font-size: 14px;
-            color: #666;
-        }
-
-        .author-image, .cover-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-
-        .news-author {
-            font-weight: bold;
-        }
-
-        .news-date {
-            display: block; /* makes it start on a new line */
-            margin-top: 10px;
-        }
-    </style>
+   
 </head>
+<nav class="">
+    <div class="navbar bg-base-100 bg-whtie justify-between flex shadow-md">
+        <div class="flex ">
+                <div class="flex flex-row ">
+                  <img class="w-[68px] h-[59px]" src="https://raw.githubusercontent.com/oattao123/project_oopdatabase/Ui/asset/logo.png" alt="logo" />
+                  <a class=" text-[#B52245] text-[30px] my-auto" href="/login" id="bizna-logo">BIZ-NA</a>
+                </div>
+                <ul class="flex flex-column gap-10 ml-10">
+                  <li class="my-auto">
+                    <a class="text-black text-[30px] " href="{{ url_for('calculate') }}" >Market</a>
+                  </li>
+                  <li  class="m-3">
+                    <a class="text-black text-[30px] pl-4 pr-4 pt-2 pb-2 pointer" href="{{ url_for('display_news') }}">News</a>
+                  </li>
+                </ul>
+               
+        </div>
+        <div class="  my-auto">
+                
+                <a class="text-white text-[25px] bg-[#B52245] pl-4 pr-4 pt-2 pb-2 rounded-full" id="Register" href="/sign_in">Logout</a>
+        </div>
+             
+    </div>
+   
+</nav>
 <body>
-    <div class="container">
-        <h2>Add News</h2>
-        <form action="/add_news" method="post">
-            <input type="text" name="title" placeholder="Title" required>
-            <textarea name="content" placeholder="Content" required></textarea>
-            <input type="text" name="date_published" placeholder="Date" required>
-            <input type="text" name="related_asset" placeholder="Related Asset">
-            <input type="text" name="cover_image" placeholder="Cover Image URL">
-            <input type="text" name="author_name" placeholder="Author Name">
-            <input type="text" name="author_image" placeholder="Author Image URL">
-            <input type="text" name="category" placeholder="Category">
-            <input type="text" name="full_content" placeholder="Full Content">
-            <input type="text" name="short_description" placeholder="Short Description">
-            <button type="submit">Submit</button>
-        </form>
-
-        <h2>Existing News</h2>
-        <div id="newsList">
-            {% for news_item in news %}
-            <div class="news-item">
-                <h3 class="news-title">{{ news_item.title }}</h3>
-                <p class="news-content">{{ news_item.content }}</p>
-                <form action="/delete_news" method="post">
-                    <input type="text" name="title" placeholder="Enter title to delete" required>
-                    <button type="submit">Delete</button>
+    <div class="mx-[300px] flex flex-row gap-4 my-[50px]">
+       <div class=" basis-1/2">
+        <h2 class="text-[25px]">Add News</h2>
+        <div class="border rounded-xl shadow-md">
+           
+            <div class="flex flex-col gap-4 ">
+                
+                <form  class="flex flex-col" action="/add_news" method="post">
+                    <input class="m-3 input input-bordered h-[40px] w-ful" type="text" name="title" placeholder="Title" required>
+                    <textarea class="m-3 input input-bordered h-[100px] w-ful"  name="content" placeholder="Content" required></textarea>
+                    <input class="m-3 input input-bordered h-[40px] w-ful" type="text" name="date_published" placeholder="Date" required>
+                    <input class="m-3 input input-bordered h-[40px] w-ful" type="text" name="related_asset" placeholder="Related Asset">
+                    <input class="m-3 input input-bordered h-[40px] w-ful" type="text" name="cover_image" placeholder="Cover Image URL">
+                    <input class="m-3 input input-bordered h-[40px] w-ful" type="text" name="author_name" placeholder="Author Name">
+                    <input class="m-3 input input-bordered h-[40px] w-ful" type="text" name="author_image" placeholder="Author Image URL">
+                    <input class="m-3 input input-bordered h-[40px] w-ful" type="text" name="category" placeholder="Category">
+                    <input class="m-3 input input-bordered h-[40px] w-ful" type="text" name="full_content" placeholder="Full Content">
+                    <input class="m-3 input input-bordered h-[40px] w-ful" type="text" name="short_description" placeholder="Short Description">
+                   <div class="text-center">
+                    <button class=" btn text-[25px] w-[150px] h-[60px] bg-[#B52245] rounded-full text-white border-[#B52245] mb-5" type="submit">Submit</button>
+                   </div>
                 </form>
             </div>
-            {% endfor %}
-        </div>
+           </div>
+       </div>
+       <div class="basis-1/2">
+        <h2 class="text-[25px]">Existing News</h2>  
+            <div class="border rounded-xl shadow-md ">
+
+       
+            <div id="newsList " class="p-3">
+                {% for news_item in news %}
+                <div class="news-item">
+                    <h3 class="news-title ">{{ news_item.title }}</h3>
+                    <p class="news-content">{{ news_item.content }}</p>
+                    <form action="/delete_news" method="post">
+                        <input class="m-3 input input-bordered h-[40px] w-ful" type="text" name="title" placeholder="Enter title to delete" required>
+                        <button class="text-[15px] w-[100px] h-[40px] bg-[#B52245] rounded-md text-white border-[#B52245] " type="submit">Delete</button>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+            </div>
+       </div>
     </div>
 </body>
 </html>

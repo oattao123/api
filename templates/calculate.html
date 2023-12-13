@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <title>Portfolio Result</title>
     <script>
         function reloadPage() {
@@ -13,82 +15,130 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/path/to/portfolioChart.js"></script>
 </head>
-<body class="bg-light py-5">
-<div class="container">
-    <div class="row justify-content-center">
+<body class="">
+    <nav class="">
+        <div class="navbar bg-base-100 bg-whtie justify-between flex shadow-md">
+            <div class="flex ">
+                    <div class="flex flex-row ">
+                      <img class="w-[68px] h-[59px]" src="https://raw.githubusercontent.com/oattao123/project_oopdatabase/Ui/asset/logo.png" alt="logo" />
+                      <a class=" text-[#B52245] text-[30px] my-auto" href="/login" id="bizna-logo">BIZ-NA</a>
+                    </div>
+                    <ul class="flex flex-column gap-10 ml-10">
+                      <li class="my-auto">
+                        <a class="text-black text-[30px] " href="{{ url_for('calculate') }}" >Market</a>
+                      </li>
+                      <li  class="m-3">
+                        <a class="text-black text-[30px] pl-4 pr-4 pt-2 pb-2 pointer" href="{{ url_for('display_news') }}">News</a>
+                      </li>
+                    </ul>
+                   
+            </div>
+            <div class="  my-auto">
+                    
+                    <a class="text-white text-[25px] bg-[#B52245] pl-4 pr-4 pt-2 pb-2 rounded-full" id="Register" href="/sign_in">Logout</a>
+            </div>
+                 
+        </div>
+       
+    </nav>
+<div class="mx-[100px] mt-5">
+    <div class="">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header bg-success text-white">Portfolio Value Result</div>
+                <div class="text-black text-[50px] mx-[200px] ">Portfolio Value Result</div>
                 <div class="card-body">
-                    <h4>User Information:</h4>
-                    <p><strong>Username:</strong> {{ user }}</p>
-                    <p><strong>User ID:</strong> {{ user_id }}</p>
-                    <hr>
-                    <h2>Portfolio for {{ user }}</h2>
-                    <p>Total value: {{ value }}</p>
+                    <div class="border rounded-xl mx-[200px] p-5 shadow-md">
+                        <h4 class="text-[30px]">User Information</h4>
+                        <p><strong>Username:</strong> {{ user }}</p>
+                        <p><strong>User ID:</strong> {{ user_id }}</p>
+                        <h2>Portfolio for {{ user }}</h2>
+                        <p>Total value: {{ value }}</p>
+                    </div>
+                   
+                   <div class="border rounded-xl mx-[200px] p-5 shadow-md">
+
                     
-                    <h3>Stocks:</h3>
-                    <ul>
-                        {% for stock, quantity in stocks %}
-                        <li>{{ stock }}: {{ quantity }}</li>
-                        {% endfor %}
+                        <h3 class="text-[30px]">Stocks</h3>
+                        <ul>
+                            {% for stock, quantity in stocks %}
+                            <li>{{ stock }}: {{ quantity }}</li>
+                            {% endfor %}
+                        </ul>
+                        <h3>Cryptocurrencies:</h3>
+                        <ul>
+                            {% for crypto, quantity in cryptocurrencies %}
+                            <li>{{ crypto }}: {{ quantity }}</li>
+                            {% endfor %}
                     </ul>
-                    <h3>Cryptocurrencies:</h3>
-                    <ul>
-                        {% for crypto, quantity in cryptocurrencies %}
-                        <li>{{ crypto }}: {{ quantity }}</li>
-                        {% endfor %}
-                    </ul>
+                   </div>
+                   <div class="flex flex-row gap-5 mx-auto">
+                    <div class="border p-5 rounded-xl shadow-md w-[300px] h-[200px]">
 
-                    <form action="/add_stock" method="post" class="mb-3">
-                        <h5>Add Stock:</h5>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="stock_name" placeholder="Stock Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="number" class="form-control" name="stock_quantity" placeholder="Quantity" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Add</button>
-                    </form>
+                        <form action="/add_stock" method="post" class="mb-3">
+                            <h5>Add Stock</h5>
+                            <div class="flex flex-col gap-3">
+                                <div class="form-group">
+                                    <input class="input input-bordered h-[40px] w-full" type="text" class="form-control" name="stock_name" placeholder="Stock Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="input input-bordered h-[40px] w-full" type="number" class="form-control" name="stock_quantity" placeholder="Quantity" required>
+                                </div>
+                            </div>
+                            <button class="mt-3 text-white text-[15px] bg-[#B52245] pl-2 pr-2 pt-2 pb-2 rounded-md" type="submit" class="btn btn-primary">Add</button>
+                        </form>
+                    </div>
 
-                    <form action="/delete_stock" method="post" class="mb-3">
+                   <div>
+                    <form  action="/delete_stock" method="post" class="border p-5 rounded-xl shadow-md w-[300px] h-[200px]">
                         <h5>Delete Stock:</h5>
                         <input type="hidden" name="user_id" value="{{ user_id }}">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="stock_name" placeholder="Stock Name" required>
+                        <div class="flex flex-col gap-3">
+                            <div class="form-group">
+                                <input type="text" class="input input-bordered h-[40px] w-full" name="stock_name" placeholder="Stock Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="input input-bordered h-[40px] w-full" name="stock_quantity" placeholder="Quantity to delete" required>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <input type="number" class="form-control" name="stock_quantity" placeholder="Quantity to delete" required>
-                        </div>
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="mt-3 text-white text-[15px] bg-[#B52245] pl-2 pr-2 pt-2 pb-2 rounded-md">Delete</button>
                     </form>
 
-                    <form action="/add_crypto" method="post" class="mb-3">
-                        <h5>Add Cryptocurrency:</h5>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="crypto_name" placeholder="Cryptocurrency Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="number" class="form-control" name="crypto_quantity" placeholder="Quantity" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Add</button>
-                    </form>
+                   </div>
+                    <div>
+                        <form action="/add_crypto" method="post" class="border p-5 rounded-xl shadow-md w-[300px] h-[200px]">
+                            <h5>Add Cryptocurrency:</h5>
+                            <div class="flex flex-col gap-3">
+                                <div class="form-group">
+                                    <input type="text" class="input input-bordered h-[40px] w-full" name="crypto_name" placeholder="Cryptocurrency Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" class="input input-bordered h-[40px] w-full" name="crypto_quantity" placeholder="Quantity" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="mt-3 text-white text-[15px] bg-[#B52245] pl-2 pr-2 pt-2 pb-2 rounded-md">Add</button>
+                        </form>
+                    </div>
 
-                    <form action="/delete_crypto" method="post" class="mb-3">
+                   <div>
+                    <form action="/delete_crypto" method="post" class="border p-5 rounded-xl shadow-md w-[300px] h-[200px]">
                         <h5>Delete Cryptocurrency:</h5>
                         <input type="hidden" name="user_id" value="{{ user_id }}">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="crypto_name" placeholder="Cryptocurrency Name" required>
+                        <div class="flex flex-col gap-3">
+                            <div class="form-group">
+                                <input type="text" class="input input-bordered h-[40px] w-full" name="crypto_name" placeholder="Cryptocurrency Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="input input-bordered h-[40px] w-full" name="crypto_quantity" placeholder="Quantity to delete" required>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <input type="number" class="form-control" name="crypto_quantity" placeholder="Quantity to delete" required>
-                        </div>
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="mt-3 text-white text-[15px] bg-[#B52245] pl-2 pr-2 pt-2 pb-2 rounded-md">Delete</button>
                     </form>
+                   </div>
+                   </div>
 
-                    <div class="return-button">
-                        <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Return to Dashboard</a>
-                        <a href="{{ url_for('display_news') }}" class="btn btn-primary">View News</a>
+                    <div class="text-center mt-5">
+                        <a class="text-white text-[25px] bg-[#B52245] pl-4 pr-4 pt-2 pb-2 rounded-xl" href="{{ url_for('dashboard') }}" class="btn btn-primary">Return to Dashboard</a>
+                        <a class="text-white text-[25px] bg-[#B52245] pl-4 pr-4 pt-2 pb-2 rounded-xl" href="{{ url_for('display_news') }}" class="btn btn-primary">View News</a>
                     </div>
                 </div>
             </div>
