@@ -19,12 +19,15 @@
                       <a class=" text-[#B52245] text-[30px] my-auto" href="/login" id="bizna-logo">BIZ-NA</a>
                     </div>
                     <ul class="flex flex-column gap-10 ml-10">
-                      <li class="my-auto">
-                        <a class="text-black text-[30px] " href="{{ url_for('calculate') }}" >Market</a>
-                      </li>
-                      <li  class="m-3">
-                        <a class="text-black text-[30px] pl-4 pr-4 pt-2 pb-2 pointer" href="{{ url_for('display_news') }}">News</a>
-                      </li>
+                        <li class="my-auto">
+                            <a class="text-black text-[30px] " href="/stock">Stock</a>
+                          </li>
+                          <li class="my-auto">
+                            <a class="text-black text-[30px] " href="/cryptocurrency">Cryptocurrency</a>
+                          </li>
+                          <li  class="m-3">
+                            <a class="text-black text-[30px] pl-4 pr-4 pt-2 pb-2 pointer" href="{{ url_for('display_news') }}">News</a>
+                          </li>
                     </ul>
                    
             </div>
@@ -36,6 +39,42 @@
         </div>
        
     </nav>
+
+    <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <div class="tradingview-widget-copyright"><a href="https://th.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text"></span></a></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+        {
+        "symbols": [
+          {
+            "proName": "FOREXCOM:SPXUSD",
+            "title": "เอสแอนด์พี 500"
+          },
+          {
+            "proName": "FOREXCOM:NSXUSD",
+            "title": "US 100"
+          },
+          {
+            "proName": "FX_IDC:EURUSD",
+            "title": "EUR to USD"
+          },
+          {
+            "proName": "BITSTAMP:BTCUSD",
+            "title": "บิทคอยน์"
+          },
+          {
+            "proName": "BITSTAMP:ETHUSD",
+            "title": "อีเธอเรียม"
+          }
+        ],
+        "showSymbolLogo": true,
+        "colorTheme": "dark",
+        "isTransparent": false,
+        "displayMode": "adaptive",
+        "locale": "th_TH"
+      }
+        </script>
+      </div>
 <div class="border mx-[300px] my-[100px] p-5 rounded-xl gap-4 flex flex-col">
     <h2 class="text-[35px] ">User Dashboard</h2>
 

@@ -1,17 +1,96 @@
-<!-- TradingView Widget BEGIN -->
-<div class="tradingview-widget-container">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>Crypto</title>
+</head>
+
+<body>
+  <nav class="">
+    <div class="navbar bg-base-100 bg-whtie justify-between flex shadow-md">
+        <div class="flex ">
+                <div class="flex flex-row ">
+                  <img class="w-[68px] h-[59px]" src="https://raw.githubusercontent.com/oattao123/project_oopdatabase/Ui/asset/logo.png" alt="logo" />
+                  <a class=" text-[#B52245] text-[30px] my-auto" href="/login" id="bizna-logo">BIZ-NA</a> 
+                </div>
+                <ul class="flex flex-column gap-10 ml-10">
+                  <li class="my-auto">
+                    <a class="text-black text-[30px] " href="/stock">Stock</a>
+                  </li>
+                  <li class="my-auto">
+                    <a class="text-black text-[30px] " href="/cryptocurrency">Cryptocurrency</a>
+                  </li>
+                  <li  class="m-3">
+                    <a class="text-black text-[30px] pl-4 pr-4 pt-2 pb-2 pointer" href="{{ url_for('display_news') }}">News</a>
+                  </li>
+                </ul>
+        </div>
+        <div class="  my-auto">
+                
+                <a class="text-white text-[25px] bg-[#B52245] pl-4 pr-4 pt-2 pb-2 rounded-full" id="Register" href="/">Logout</a>
+        </div>
+             
+    </div>
+  </nav>
+  <div class="tradingview-widget-container">
     <div class="tradingview-widget-container__widget"></div>
-    <div class="tradingview-widget-copyright"><a href="https://th.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+    <div class="tradingview-widget-copyright"><a href="https://th.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text"></span></a></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
     {
-    "width": 1000,
-    "height": 490,
-    "defaultColumn": "overview",
-    "screener_type": "crypto_mkt",
-    "displayCurrency": "USD",
+    "symbols": [
+      {
+        "proName": "FOREXCOM:SPXUSD",
+        "title": "เอสแอนด์พี 500"
+      },
+      {
+        "proName": "FOREXCOM:NSXUSD",
+        "title": "US 100"
+      },
+      {
+        "proName": "FX_IDC:EURUSD",
+        "title": "EUR to USD"
+      },
+      {
+        "proName": "BITSTAMP:BTCUSD",
+        "title": "บิทคอยน์"
+      },
+      {
+        "proName": "BITSTAMP:ETHUSD",
+        "title": "อีเธอเรียม"
+      }
+    ],
+    "showSymbolLogo": true,
     "colorTheme": "dark",
+    "isTransparent": false,
+    "displayMode": "adaptive",
     "locale": "th_TH"
   }
     </script>
   </div>
-  <!-- TradingView Widget END -->
+  <div class=" flex flex-col gap-3 mt-3 mx-[250px]">
+
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget "></div>
+      <div class="tradingview-widget-copyright"><a href="https://th.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+      {
+      
+      "height": 850,
+      "defaultColumn": "overview",
+      "screener_type": "crypto_mkt",
+      "displayCurrency": "USD",
+      "colorTheme": "white",
+      "locale": "th_TH"
+    }
+      </script>
+    </div>
+    <!-- TradingView Widget END -->
+  </div>
+  </div>
+
+</body>

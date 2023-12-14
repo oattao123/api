@@ -31,7 +31,8 @@ class StockPortfolioApp:
         self.app.route('/add_news', methods=['GET', 'POST'])(self.add_news)
         self.app.route('/delete_news',methods=['POST'])(self.delete_news)
         self.app.route('/manager_news')(self.manager_news)
-        # self.app.route('/edit_news', methods=['GET', 'POST'])(self.edit_news)
+        self.app.route('/cryptocurrency')(self.market_cryptocurrency)
+        self.app.route('/stock')(self.market_stock)
 
 
     def __enter__(self):
@@ -301,8 +302,12 @@ class StockPortfolioApp:
         else:
             return "Error deleting news", 500
 
+    def market_cryptocurrency(self):
+        # Simply render the market_cryptocurrency.html template
+        return render_template('market_cryptocurrency.html')
 
-
+    def market_stock(self):
+        return render_template('market_stock.html')
 
 
 if __name__ == "__main__":

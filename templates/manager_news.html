@@ -18,12 +18,15 @@
                   <a class=" text-[#B52245] text-[30px] my-auto" href="/login" id="bizna-logo">BIZ-NA</a>
                 </div>
                 <ul class="flex flex-column gap-10 ml-10">
-                  <li class="my-auto">
-                    <a class="text-black text-[30px] " href="{{ url_for('calculate') }}" >Market</a>
-                  </li>
-                  <li  class="m-3">
-                    <a class="text-black text-[30px] pl-4 pr-4 pt-2 pb-2 pointer" href="{{ url_for('display_news') }}">News</a>
-                  </li>
+                    <li class="my-auto">
+                        <a class="text-black text-[30px] " href="/stock">Stock</a>
+                      </li>
+                      <li class="my-auto">
+                        <a class="text-black text-[30px] " href="/cryptocurrency">Cryptocurrency</a>
+                      </li>
+                      <li  class="m-3">
+                        <a class="text-black text-[30px] pl-4 pr-4 pt-2 pb-2 pointer" href="{{ url_for('display_news') }}">News</a>
+                      </li>
                 </ul>
                
         </div>

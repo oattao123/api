@@ -1,48 +1,314 @@
-<!-- TradingView Widget BEGIN -->
-<div class="tradingview-widget-container">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>Stock</title>
+</head>
+
+<body>
+  <nav class="">
+    <div class="navbar bg-base-100 bg-whtie justify-between flex shadow-md">
+        <div class="flex ">
+                <div class="flex flex-row ">
+                  <img class="w-[68px] h-[59px]" src="https://raw.githubusercontent.com/oattao123/project_oopdatabase/Ui/asset/logo.png" alt="logo" />
+                  <a class=" text-[#B52245] text-[30px] my-auto" href="/login" id="bizna-logo">BIZ-NA</a> 
+                </div>
+                <ul class="flex flex-column gap-10 ml-10">
+                  <li class="my-auto">
+                    <a class="text-black text-[30px] " href="/stock">Stock</a>
+                  </li>
+                  <li class="my-auto">
+                    <a class="text-black text-[30px] " href="/cryptocurrency">Cryptocurrency</a>
+                  </li>
+                  <li  class="m-3">
+                    <a class="text-black text-[30px] pl-4 pr-4 pt-2 pb-2 pointer" href="{{ url_for('display_news') }}">News</a>
+                  </li>
+                </ul>
+               
+        </div>
+        <div class="  my-auto">
+                
+                <a class="text-white text-[25px] bg-[#B52245] pl-4 pr-4 pt-2 pb-2 rounded-full" id="Register" href="/">Logout</a>
+        </div>
+             
+    </div>
+   
+  </nav>
+  <div class="tradingview-widget-container">
     <div class="tradingview-widget-container__widget"></div>
-    <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
+    <div class="tradingview-widget-copyright"><a href="https://th.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text"></span></a></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
     {
-    "width": 770,
-    "height": 450,
-    "symbolsGroups": [
+    "symbols": [
       {
-        "name": "Indices",
-        "originalName": "Indices",
-        "symbols": [
-          {
-            "name": "NASDAQ:TSLA"
-          },
-          {
-            "name": "NASDAQ:AAPL"
-          },
-          {
-            "name": "NASDAQ:NVDA"
-          },
-          {
-            "name": "NASDAQ:AMD"
-          },
-          {
-            "name": "NASDAQ:AMZN"
-          },
-          {
-            "name": "NASDAQ:MSFT"
-          },
-          {
-            "name": "NASDAQ:GOOG"
-          },
-          {
-            "name": "NASDAQ:UPST"
-          }
-        ]
+        "proName": "FOREXCOM:SPXUSD",
+        "title": "เอสแอนด์พี 500"
+      },
+      {
+        "proName": "FOREXCOM:NSXUSD",
+        "title": "US 100"
+      },
+      {
+        "proName": "FX_IDC:EURUSD",
+        "title": "EUR to USD"
+      },
+      {
+        "proName": "BITSTAMP:BTCUSD",
+        "title": "บิทคอยน์"
+      },
+      {
+        "proName": "BITSTAMP:ETHUSD",
+        "title": "อีเธอเรียม"
       }
     ],
     "showSymbolLogo": true,
     "colorTheme": "dark",
     "isTransparent": false,
-    "locale": "en"
+    "displayMode": "adaptive",
+    "locale": "th_TH"
   }
     </script>
   </div>
-  <!-- TradingView Widget END -->
+  <div class="mt-3 mx-[250px]">
+    <div>
+      <!-- edit path this -->
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
+  {
+  "title": "Stocks",
+  "height": 850,
+  "locale": "en",
+  "showSymbolLogo": true,
+  "symbolsGroups": [
+    {
+      "name": "Financial",
+      "symbols": [
+        {
+          "name": "NYSE:JPM",
+          "displayName": "JPMorgan Chase"
+        },
+        {
+          "name": "NYSE:WFC",
+          "displayName": "Wells Fargo Co New"
+        },
+        {
+          "name": "NYSE:BAC",
+          "displayName": "Bank Amer Corp"
+        },
+        {
+          "name": "NYSE:HSBC",
+          "displayName": "Hsbc Hldgs Plc"
+        },
+        {
+          "name": "NYSE:C",
+          "displayName": "Citigroup Inc"
+        },
+        {
+          "name": "NYSE:MA",
+          "displayName": "Mastercard Incorporated"
+        }
+      ]
+    },
+    {
+      "name": "Technology",
+      "symbols": [
+        {
+          "name": "NASDAQ:AAPL",
+          "displayName": "Apple"
+        },
+        {
+          "name": "NASDAQ:GOOGL",
+          "displayName": "Alphabet"
+        },
+        {
+          "name": "NASDAQ:MSFT",
+          "displayName": "Microsoft"
+        },
+        {
+          "name": "NASDAQ:FB",
+          "displayName": "Meta Platforms"
+        },
+        {
+          "name": "NYSE:ORCL",
+          "displayName": "Oracle Corp"
+        },
+        {
+          "name": "NASDAQ:INTC",
+          "displayName": "Intel Corp"
+        }
+      ]
+    },
+    {
+      "name": "Services",
+      "symbols": [
+        {
+          "name": "NASDAQ:AMZN",
+          "displayName": "Amazon"
+        },
+        {
+          "name": "NYSE:BABA",
+          "displayName": "Alibaba Group Hldg Ltd"
+        },
+        {
+          "name": "NYSE:T",
+          "displayName": "At&t Inc"
+        },
+        {
+          "name": "NYSE:WMT",
+          "displayName": "Walmart"
+        },
+        {
+          "name": "NYSE:V",
+          "displayName": "Visa"
+        }
+      ]
+    }
+  ],
+  "colorTheme": "light"
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
+
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
+  {
+  "height": 850,
+  "symbolsGroups": [
+    {
+      "name": "Indices",
+      "originalName": "Indices",
+      "symbols": [
+        {
+          "name": "FOREXCOM:SPXUSD",
+          "displayName": "S&P 500"
+        },
+        {
+          "name": "FOREXCOM:NSXUSD",
+          "displayName": "US 100"
+        },
+        {
+          "name": "FOREXCOM:DJI",
+          "displayName": "Dow 30"
+        },
+        {
+          "name": "INDEX:NKY",
+          "displayName": "Nikkei 225"
+        },
+        {
+          "name": "INDEX:DEU40",
+          "displayName": "DAX Index"
+        },
+        {
+          "name": "FOREXCOM:UKXGBP",
+          "displayName": "UK 100"
+        }
+      ]
+    },
+    {
+      "name": "Futures",
+      "originalName": "Futures",
+      "symbols": [
+        {
+          "name": "CME_MINI:ES1!",
+          "displayName": "S&P 500"
+        },
+        {
+          "name": "CME:6E1!",
+          "displayName": "Euro"
+        },
+        {
+          "name": "COMEX:GC1!",
+          "displayName": "Gold"
+        },
+        {
+          "name": "NYMEX:CL1!",
+          "displayName": "WTI Crude Oil"
+        },
+        {
+          "name": "NYMEX:NG1!",
+          "displayName": "Gas"
+        },
+        {
+          "name": "CBOT:ZC1!",
+          "displayName": "Corn"
+        }
+      ]
+    },
+    {
+      "name": "Bonds",
+      "originalName": "Bonds",
+      "symbols": [
+        {
+          "name": "CBOT:ZB1!",
+          "displayName": "T-Bond"
+        },
+        {
+          "name": "CBOT:UB1!",
+          "displayName": "Ultra T-Bond"
+        },
+        {
+          "name": "EUREX:FGBL1!",
+          "displayName": "Euro Bund"
+        },
+        {
+          "name": "EUREX:FBTP1!",
+          "displayName": "Euro BTP"
+        },
+        {
+          "name": "EUREX:FGBM1!",
+          "displayName": "Euro BOBL"
+        }
+      ]
+    },
+    {
+      "name": "Forex",
+      "originalName": "Forex",
+      "symbols": [
+        {
+          "name": "FX:EURUSD",
+          "displayName": "EUR to USD"
+        },
+        {
+          "name": "FX:GBPUSD",
+          "displayName": "GBP to USD"
+        },
+        {
+          "name": "FX:USDJPY",
+          "displayName": "USD to JPY"
+        },
+        {
+          "name": "FX:USDCHF",
+          "displayName": "USD to CHF"
+        },
+        {
+          "name": "FX:AUDUSD",
+          "displayName": "AUD to USD"
+        },
+        {
+          "name": "FX:USDCAD",
+          "displayName": "USD to CAD"
+        }
+      ]
+    }
+  ],
+  "showSymbolLogo": true,
+  "colorTheme": "light",
+  "isTransparent": false,
+  "locale": "en"
+}
+  </script>
+</div>
+    </div>
+  </div>
+
+</body>
