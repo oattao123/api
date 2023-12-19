@@ -78,27 +78,29 @@
       }
         </script>
       </div>
-    <div class="news-container mx-[200px]">
-        <h1 class="text-[35px]">News</h1>
-        <div class="">
-            <ul class="flex flex-row gap-3">  
-                {% for item in news %}
-                <li class="news-item border rounded-md p-3 w-[225px]">
-                    <span class="news-category">{{ item['category'] }}</span>
-                    <h2 class="news-title text-[20px]">{{ item['title'] }}</h2>
-                    <div>
-                        <img class="w-[30px] h-[30px] rounded-full" src="{{ item['author_image'] }}" alt="Author image" class="author-image">
-                        <span class="news-author">{{ item['author_name'] }}</span>
-                    </div>
-                    <img class="w-[200px] h-[200px] rounded-md" src="{{ item['cover_image'] }}" alt="Cover image" class="cover-image">
-                    <p class="news-content">{{ item['short_description'] }}</p>
-                    <small class="news-date">วันที่เผยแพร่: {{ item['date_published'] }}</small>
-                    {% if item['related_asset'] %}
-                        <br><small>สินทรัพย์ที่เกี่ยวข้อง: {{ item['related_asset'] }}</small>
-                    {% endif %}
-                </li>
-                {% endfor %}
-            </ul>
+      <div class="flex justify-center items-center h-screen">
+        <div class="news-container mx-4">
+            <h1 class="text-4xl font-bold">News</h1>
+            <div class="mt-4">
+                <ul class="flex flex-wrap gap-4">
+                    {% for item in news %}
+                    <li class="news-item border rounded-md p-4 w-[300px]">
+                        <span class="news-category text-sm">{{ item['category'] }}</span>
+                        <h2 class="news-title text-xl font-semibold">{{ item['title'] }}</h2>
+                        <div class="flex items-center mt-2">
+                            <img class="w-8 h-8 rounded-full" src="{{ item['author_image'] }}" alt="Author image">
+                            <span class="news-author ml-2 text-sm">{{ item['author_name'] }}</span>
+                        </div>
+                        <img class="mt-4 w-full h-[200px] rounded-md" src="{{ item['cover_image'] }}" alt="Cover image">
+                        <p class="news-content mt-4 text-sm">{{ item['short_description'] }}</p>
+                        <small class="news-date text-xs block mt-4">Published: {{ item['date_published'] }}</small>
+                        {% if item['related_asset'] %}
+                        <small class="text-xs block mt-1">Related Asset: {{ item['related_asset'] }}</small>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
 </body>
